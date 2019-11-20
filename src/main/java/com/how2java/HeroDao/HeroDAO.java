@@ -26,7 +26,7 @@ public class HeroDAO {
      * @throws SQLException
      */
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/test?characterEcoding=UTF-8&serverTimeZone=GMT", "root", "admin");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&serverTimezone=GMT", "root", "admin");
     }
 
     /**
@@ -55,10 +55,10 @@ public class HeroDAO {
      *
      * @param hero
      */
-    public void add(Hero hero) {
+    public Hero add(Hero hero) {
         String sql = "insert into hero values(null, ?, ?, ?)";
         try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(sql);) {
+             PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 
             ps.setString(1, hero.getName());
             ps.setFloat(2, hero.getHp());
@@ -68,13 +68,14 @@ public class HeroDAO {
 //          返回此语句生成的键
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt(1);
                 hero.setId(id);
+                return hero;
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**

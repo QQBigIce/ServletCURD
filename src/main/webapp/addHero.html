@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addHero</title>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<p>请输入英雄属性</p>
+<form>
+    名称：<input type="text" id="name" value="默认英雄"><br>
+    血量：<input type="text" id="hp" value="500"><br>
+    护甲：<input type="text" id="damage" value="300"><br>
+    <input type="button" id="sender" value="提交">
+</form>
+
+<table>
+    <tr>
+        <td>名称</td>
+        <td>血量</td>
+        <td>护甲</td>
+    </tr>
+    <tbody>
+    <tr>
+        <td id="tid"></td>
+        <td id="tname"></td>
+        <td id="thp"></td>
+        <td id="tdamage"></td>
+    </tr>
+    </tbody>
+
+</table>
+<script type="text/javascript">
+    $("#sender").click(function () {
+        var name = $("#name").val();
+        var hp = $("#hp").val();
+        var damage = $("#damage").val();
+        var url = "add";
+        var hero = {"name": name, "hp": hp, "damage": damage};
+
+        $.post(
+            url,
+            {"data": JSON.stringify(hero)},
+            function (data) {
+                alert("1");
+                var json = JSON.parse(data);
+                var tid = json.hero.id;
+                var tname = json.hero.name;
+                var thp = json.hero.hp;
+                var tdamage = json.hero.damage;
+
+                alert("2")
+                $("#tid").text(tid);
+                $("#tname").text(tname);
+                $("#thp").text(thp);
+                $("#tdamage").text(tdamage);
+                alert("3");
+            }
+        );
+    });
+</script>
+</body>
+</html>
