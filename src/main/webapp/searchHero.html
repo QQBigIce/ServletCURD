@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search'</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        table td{
+            width: 50px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+<div align="center">
+    <table border="1">
+        <tr>
+            <td>id</td>
+            <td>名称</td>
+            <td>血量</td>
+            <td>护甲</td>
+        </tr>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        var url = "search"
+        $.get(
+            url,
+            function (data) {
+                console.log(data);
+                var json = JSON.parse(data);
+                var s;
+                for (var hero in json) {
+                    s += "<tr>";
+                    s += ("<td>" + hero.id + "</td>");
+                    s += ("<td>" + hero.name + "</td>");
+                    s += ("<td>" + hero.hp + "</td>");
+                    s += ("<td>" + hero.damage + "</td>");
+                    s += "</tr>";
+                }
+                $("#tbody").html(s);
+            }
+        )
+    });
+</script>
+</body>
+</html>

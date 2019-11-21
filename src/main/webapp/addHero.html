@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>addHero</title>
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <style>
+        table{
+            text-align: center;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        table td{
+            width: 50px;
+            height: 30px;
+        }
+    </style>
 </head>
 <body>
 <p>请输入英雄属性</p>
@@ -17,13 +26,14 @@
     <input type="button" id="sender" value="提交">
 </form>
 
-<table>
+<table border="1">
     <tr>
+        <td>id</td>
         <td>名称</td>
         <td>血量</td>
         <td>护甲</td>
     </tr>
-    <tbody>
+    <tbody class="tableData">
     <tr>
         <td id="tid"></td>
         <td id="tname"></td>
@@ -45,19 +55,16 @@
             url,
             {"data": JSON.stringify(hero)},
             function (data) {
-                alert("1");
                 var json = JSON.parse(data);
                 var tid = json.hero.id;
                 var tname = json.hero.name;
                 var thp = json.hero.hp;
                 var tdamage = json.hero.damage;
 
-                alert("2")
                 $("#tid").text(tid);
                 $("#tname").text(tname);
                 $("#thp").text(thp);
                 $("#tdamage").text(tdamage);
-                alert("3");
             }
         );
     });

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "addHero")
-public class addHero extends HttpServlet {
+public class AddHero extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String s = request.getParameter("data");
         JSONObject jb = JSONObject.parseObject(s);

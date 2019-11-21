@@ -7,10 +7,19 @@
 
   <servlet>
     <servlet-name>add</servlet-name>
-    <servlet-class>com.how2java.servletCURD.addHero</servlet-class>
+    <servlet-class>com.how2java.servletCURD.AddHero</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>add</servlet-name>
     <url-pattern>/add</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>search</servlet-name>
+    <servlet-class>com.how2java.servletCURD.SearchHero</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search</url-pattern>
   </servlet-mapping>
 </web-app>
