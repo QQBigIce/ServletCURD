@@ -15,6 +15,10 @@
             height: 30px;
             text-align: center;
         }
+
+        form{
+            display: none;
+        }
     </style>
 
 </head>
@@ -28,11 +32,19 @@
             <td>血量</td>
             <td>护甲</td>
             <td>删除</td>
+            <td>修改</td>
         </tr>
         <tbody id="tbody">
 
         </tbody>
     </table>
+
+    <form id="#">
+        姓名：<input type="text" id="name"><br>
+        血量：<input type="text" id="hp"><br>
+        护甲：<input type="text" id="damage"><br>
+        <input type="button" id="send" value="提交">
+    </form>
 </div>
 
 <script type="text/javascript">
@@ -51,11 +63,14 @@
                         s += ("<td>" + json[i].hp + "</td>");
                         s += ("<td>" + json[i].damage + "</td>");
                         s += ("<td> <input class='buttons' type='button' value='删除' id='delete?id=" + json[i].id + "'></td>");
+                        s += ("<td> <input type='button' class='update' value='修改' id='" + json[i].id + "'></td>");
                         s += "</tr>";
                     }
                     $("#tbody").html(s);
                 });
         });
+
+        //删除按钮按下
         $("tbody").on('click', 'input', function () {
             url = $(this).attr("id");
             $.get(
@@ -63,6 +78,14 @@
             );
             $(this).parent().parent().remove();
         });
+
+        //表格修改按钮按下
+        $("")
+
+        //input修改按钮按下
+        $("form").on('click', '#send', function () {
+
+        })
     });
 
 
