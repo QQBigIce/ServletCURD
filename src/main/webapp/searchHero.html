@@ -39,10 +39,11 @@
         </tbody>
     </table>
 
-    <form id="#">
-        姓名：<input type="text" id="name"><br>
-        血量：<input type="text" id="hp"><br>
-        护甲：<input type="text" id="damage"><br>
+    <form id="editHere">
+        ID  : <input type="text" id="id">
+        姓名: <input type="text" id="name"><br>
+        血量: <input type="text" id="hp"><br>
+        护甲: <input type="text" id="damage"><br>
         <input type="button" id="send" value="提交">
     </form>
 </div>
@@ -71,7 +72,7 @@
         });
 
         //删除按钮按下
-        $("tbody").on('click', 'input', function () {
+        $("tbody").on('click', 'input.buttons', function () {
             url = $(this).attr("id");
             $.get(
                 url
@@ -79,10 +80,26 @@
             $(this).parent().parent().remove();
         });
 
-        //表格修改按钮按下
-        $("")
+        //表格:修改按钮按下
+        $("tbody").on('click', 'input.update', function () {
+            url = "edit";
+            $this = $(this);
+            $.get(
+                url,
+                {"id": $(this).attr("id")},
+                function (data) {
+                    var json = JSON.parse(data);
+                    $("input#id").val($this.attr("id"));
+                    $("input#id").attr("readonly", "readonly");
+                    $("input#name").val(json.name);
+                    $("input#hp").val(json.hp);
+                    $("input#damage").val(json.damage);
+                    $("form#editHere").show();
+                }
+            )
+        });
 
-        //input修改按钮按下
+        //input:修改按钮按下
         $("form").on('click', '#send', function () {
 
         })

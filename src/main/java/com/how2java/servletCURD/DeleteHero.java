@@ -21,7 +21,6 @@ public class DeleteHero extends HttpServlet {
 
     protected void delete(HttpServletRequest request, HttpServletResponse response){
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
         new HeroDAO().delete(id);
     }
 }

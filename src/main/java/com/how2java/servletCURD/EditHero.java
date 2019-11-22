@@ -18,7 +18,7 @@ public class EditHero extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        edit(request, response);
     }
 
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -26,6 +26,6 @@ public class EditHero extends HttpServlet {
         Hero h = new HeroDAO().get(id);
         JSONObject json = (JSONObject) JSONObject.toJSON(h);
         response.setContentType("text/html;charset=utf-8");
-        response.getWriter().print(json);
+        response.getWriter().print(JSONObject.toJSONString(json));
     }
 }
