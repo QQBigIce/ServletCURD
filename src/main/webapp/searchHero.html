@@ -6,11 +6,12 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <style>
-        table{
+        table {
             border-collapse: collapse;
         }
-        table td{
-            width: 50px;
+
+        table td {
+            width: 80px;
             height: 30px;
             text-align: center;
         }
@@ -19,12 +20,14 @@
 </head>
 <body>
 <div align="center">
+    <button id="search">查询</button>
     <table border="1">
         <tr>
             <td>id</td>
             <td>名称</td>
             <td>血量</td>
             <td>护甲</td>
+            <td>删除</td>
         </tr>
         <tbody id="tbody">
 
@@ -32,27 +35,37 @@
     </table>
 </div>
 
-<script>
+<script type="text/javascript">
     $(function () {
-        var url = "search"
-        $.get(
-            url,
-            function (data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                var s;
-                for (var hero in json) {
-                    s += "<tr>";
-                    s += ("<td>" + hero.id + "</td>");
-                    s += ("<td>" + hero.name + "</td>");
-                    s += ("<td>" + hero.hp + "</td>");
-                    s += ("<td>" + hero.damage + "</td>");
-                    s += "</tr>";
-                }
-                $("#tbody").html(s);
-            }
-        )
+        var url = "search";
+        $("#search").click(function () {
+            $.get(
+                url,
+                function (data) {
+                    var json = JSON.parse(data);
+                    var s = new String();
+                    for (var i in json) {
+                        s += "<tr>";
+                        s += ("<td>" + json[i].id + "</td>");
+                        s += ("<td>" + json[i].name + "</td>");
+                        s += ("<td>" + json[i].hp + "</td>");
+                        s += ("<td>" + json[i].damage + "</td>");
+                        s += ("<td> <input class='buttons' type='button' value='删除' id='delete?id=" + json[i].id + "'></td>");
+                        s += "</tr>";
+                    }
+                    $("#tbody").html(s);
+                });
+        });
+        $("tbody").on('click', 'input', function () {
+            url = $(this).attr("id");
+            $.get(
+                url
+            );
+            $(this).parent().parent().remove();
+        });
     });
+
+
 </script>
 </body>
 </html>

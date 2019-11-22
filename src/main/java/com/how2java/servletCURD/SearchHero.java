@@ -37,6 +37,5 @@ public class SearchHero extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.getWriter().print(JSONArray.toJSONString(ja));
         System.out.println(JSONArray.toJSONString(ja));
-        System.out.println();
     }
 }
