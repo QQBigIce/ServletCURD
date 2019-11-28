@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="ServletCURD:war exploded">
-    <output-path>$PROJECT_DIR$/target/ServletCURD_war_exploded</output-path>
+  <artifact type="exploded-war" name="ServletCURD">
+    <output-path>$PROJECT_DIR$/out/artifacts/ServletCURD</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">

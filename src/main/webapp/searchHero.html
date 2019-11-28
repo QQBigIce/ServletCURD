@@ -16,7 +16,7 @@
             text-align: center;
         }
 
-        form{
+        form {
             display: none;
         }
     </style>
@@ -40,7 +40,7 @@
     </table>
 
     <form id="editHere">
-        ID  : <input type="text" id="id">
+        ID : <input type="text" id="id">
         姓名: <input type="text" id="name"><br>
         血量: <input type="text" id="hp"><br>
         护甲: <input type="text" id="damage"><br>
@@ -59,10 +59,10 @@
                     var s = new String();
                     for (var i in json) {
                         s += "<tr>";
-                        s += ("<td>" + json[i].id + "</td>");
-                        s += ("<td>" + json[i].name + "</td>");
-                        s += ("<td>" + json[i].hp + "</td>");
-                        s += ("<td>" + json[i].damage + "</td>");
+                        s += ("<td id='" + json[i].id + "id'>" + json[i].id + "</td>");
+                        s += ("<td id='" + json[i].id + "name'>" + json[i].name + "</td>");
+                        s += ("<td id='" + json[i].id + "hp'>" + json[i].hp + "</td>");
+                        s += ("<td id='" + json[i].id + "damage'>" + json[i].damage + "</td>");
                         s += ("<td> <input class='buttons' type='button' value='删除' id='delete?id=" + json[i].id + "'></td>");
                         s += ("<td> <input type='button' class='update' value='修改' id='" + json[i].id + "'></td>");
                         s += "</tr>";
@@ -101,8 +101,28 @@
 
         //input:修改按钮按下
         $("form").on('click', '#send', function () {
+            url = "update";
+            var id = $("input#id").val();
+            var name = $("input#name").val();
+            var hp = $("input#hp").val();
+            var damage = $("input#damage").val();
+            var json = {"hero": JSON.stringify({"id": id, "name": name, "hp": hp, "damage": damage})};
 
-        })
+            $.post(
+                url,
+                json,
+                function (data) {
+                    var hero = JSON.parse(data);
+                    $("form#editHere").hide();
+                    var newName = hero.name;
+                    var newHp = hero.hp;
+                    var newDamage = hero.damage;
+                    $("#" + id + "name").text(newName);
+                    $("#" + id + "hp").text(newHp);
+                    $("#" + id + "damage").text(newDamage);
+                }
+            );
+        });
     });
 
 

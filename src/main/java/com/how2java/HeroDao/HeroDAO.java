@@ -95,6 +95,21 @@ public class HeroDAO {
         }
     }
 
+    public void update(Hero hero){
+        String sql = "update hero set name = ?, hp = ?, damage = ? where id = ?";
+        try(Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(sql);) {
+
+            ps.setString(1, hero.getName());
+            ps.setFloat(2, hero.getHp());
+            ps.setInt(3, hero.getDamage());
+            ps.setInt(4, hero.getId());
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 根据id查询hero的name hp damage
      * @param id
